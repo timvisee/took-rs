@@ -4,17 +4,17 @@
 [![Number of downloads on crates.io][crate-download-badge]][crate-link]
 [![Project license][crate-license-badge]](LICENSE)
 
-[crate-download-badge]: https://img.shields.io/crates/d/took-rs.svg
-[crate-license-badge]: https://img.shields.io/crates/l/took-rs.svg
-[crate-link]: https://crates.io/crates/took-rs
-[crate-version-badge]: https://img.shields.io/crates/v/took-rs.svg
-[docs-badge]: https://docs.rs/took-rs/badge.svg
-[docs]: https://docs.rs/took-rs
+[crate-download-badge]: https://img.shields.io/crates/d/took.svg
+[crate-license-badge]: https://img.shields.io/crates/l/took.svg
+[crate-link]: https://crates.io/crates/took
+[crate-version-badge]: https://img.shields.io/crates/v/took.svg
+[docs-badge]: https://docs.rs/took/badge.svg
+[docs]: https://docs.rs/took
 [gitlab-ci-link]: https://gitlab.com/timvisee/took-rs/pipelines
 [gitlab-ci-master-badge]: https://gitlab.com/timvisee/took-rs/badges/master/pipeline.svg
 
 # `took`: easily measure & report elapsed time
-I always find measuring run time of code and reporting it in a human readable
+I always find measuring and reporting run time of code it in a human readable
 format troublesome.
 
 This crate provides a few simple interfaces to do just that.

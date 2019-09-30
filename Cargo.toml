@@ -1,12 +1,22 @@
 [package]
 name = "took"
 version = "0.1.0"
-authors = ["Tim Visée <tim@visee.me>"]
+authors = ["Tim Visee <3a4fb3964f@sinenomine.email>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://gitlab.com/timvisee/took-rs"
+repository = "https://gitlab.com/timvisee/took-rs"
+description = "Easily measure & report elapsed time"
+keywords = ["time", "measure", "elapsed", "took", "stopwatch"]
+categories = ["command-line-interface", "development-tools"]
 edition = "2018"
+
+[badges]
+gitlab = { repository = "timvisee/took-rs", branch = "master" }
 
 [workspace]
 members = ["took-macro"]
 
-# Member crate is used in examples
 [dev-dependencies]
+# Member crate is used in examples
 took-macro = { version = "*", path = "./took-macro" }
