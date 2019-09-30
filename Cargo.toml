@@ -4,4 +4,9 @@ version = "0.1.0"
 authors = ["Tim Visée <tim@visee.me>"]
 edition = "2018"
 
-[dependencies]
+[workspace]
+members = ["took-macro"]
+
+# Member crate is used in examples
+[dev-dependencies]
+took-macro = { version = "*", path = "./took-macro" }

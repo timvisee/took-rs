@@ -1,8 +1,9 @@
 use std::fmt;
-use std::io::{Cursor, Write};
 use std::time::{Duration, Instant};
 
 /// Simple struct tracking elapsed time.
+///
+/// On creation this struct immediately starts tracking elapsed time.
 #[derive(Clone, Debug)]
 pub struct Take {
     /// The instant this stopwatch was started at.
@@ -45,6 +46,17 @@ impl Took {
     pub fn from_std(elapsed: Duration) -> Self {
         Self { elapsed }
     }
+
+    /// Print the elapsed time with a description.
+    ///
+    /// Prints the following formatted text to `stdout`:
+    ///
+    /// ```
+    /// description took 0 s
+    /// ```
+    pub fn describe(&self, description: &str) {
+        println!("{} took {}", description, self);
+    }
 }
 
 impl fmt::Display for Took {
@@ -66,20 +78,14 @@ impl fmt::Display for Took {
         };
 
         let time = major as f64 + (minor - major * 1000) as f64 / 1000.0;
-        let buff: &mut [u8] = &mut [0; 128];
-        f.pad({
-            let mut cursor = Cursor::new(buff);
-            write!(cursor, "{:.2} {}", time, t).unwrap();
-            let len = cursor.position();
-            let buff = cursor.into_inner();
-            std::str::from_utf8(&buff[..len as usize]).unwrap()
-        })
+        f.pad(&format!("{:.2} {}", time, t))
     }
 }
 
-/// Measure the run time of the given function.
+/// Measure run time of given function, return elapsed time.
 ///
 /// Returns `Took` along with the function result.
+#[must_use]
 pub fn took<T, F>(f: F) -> (Took, T)
 where
     F: FnOnce() -> T,
@@ -87,4 +93,23 @@ where
     let take = Take::new();
     let out = f();
     (take.took(), out)
+}
+
+/// Measure run time of given function, print elapsed time.
+///
+/// Prints the following formatted text to `stdout`:
+///
+/// ```
+/// description took 0 s
+/// ```
+///
+/// Returns the function result.
+#[must_use]
+pub fn took_print<T, F>(description: &str, f: F) -> T
+where
+    F: FnOnce() -> T,
+{
+    let (took, out) = took(f);
+    eprintln!("{} took {}", description, took);
+    out
 }
