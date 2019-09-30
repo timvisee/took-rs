@@ -20,57 +20,57 @@ format troublesome.
 This crate provides a few simple interfaces to do just that.
 
 ## Examples
-```rust
-use took::Timer;
+- Measure & report manually using Timer stopwatch:
+
+  ```rust
+  use took::Timer;
+
+  let timer = Timer::new();
+  // Run heavy task
+  println!("Done! Took {}", timer.took());
+
+  // Prints:
+  // Done! Took 1.00 s
+  ```
+
+- Measure a function, report manually:
+
+  ```rust
+  use took::took;
+
+  let (took, result) = took(|| {
+      // Run heavy task
+  });
+  println!("Done, took {}", took);
+
+  // Prints:
+  // Done! Took 1.00 s
+  ```
+
+- Measure & report a function automatically using attribute:
+
+  ```rust
+  #[macro_use]
+  extern crate took_macro;
+
+  my_function();
+  other_function();
+
+  #[took]
+  pub fn my_function() {
+      // Run heavy task
+  }
 
 
+  #[took(description = "Render finished,")]
+  pub fn other_function() {
+      // Run heavy task
+  }
 
-// # Measure & report manually using Timer stopwatch
-
-let timer = Timer::new();
-// Run heavy task
-println!("Done! Took {}", timer.took());
-
-// Prints:
-// Done! Took 1.00 s
-
-
-
-// # Measure a function, report manually
-
-let (took, result) = took(|| {
-    // Run heavy task
-});
-println!("Done, took {}", took);
-
-// Prints:
-// Done! Took 1.00 s
-
-
-
-// # Measure & report a function automatically using attribute
-
-#[macro_use]
-extern crate took_macro;
-
-my_function();
-other_function();
-
-#[took]
-pub fn my_function() {
-    // Run heavy task
-}
-
-
-#[took(description = "Render finished,")]
-pub fn other_function() {
-    // Run heavy task
-}
-
-// Prints:
-// my_function() took 1.00 s
-// Render finished, took 1.00 s
-```
+  // Prints:
+  // my_function() took 1.00 s
+  // Render finished, took 1.00 s
+  ```
 
 ## Usage
 Add the dependencies in your `Cargo.toml`. The `took-macro` dependency is only
@@ -108,6 +108,13 @@ pub fn function_a() {}
 #[took(description = "Some function")]
 pub fn function_a() {}
 ```
+
+## TODO
+- Support `#[took]` attribute for almost anything
+  (function call, blocks, if-statements, ...)
+- Time formatting configurability
+- Use more precise timers
+- Print elapsed time to more than just `stderr`
 
 ## License
 This project is released under the MIT license.

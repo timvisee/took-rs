@@ -37,7 +37,9 @@ impl fmt::Display for Timer {
 }
 
 /// Defines elasped time.
+#[derive(Clone, Debug)]
 pub struct Took {
+    /// Elapsed time as duration.
     elapsed: Duration,
 }
 
@@ -45,6 +47,11 @@ impl Took {
     /// Construct `Took` from `Duration` in `std`.
     pub fn from_std(elapsed: Duration) -> Self {
         Self { elapsed }
+    }
+
+    /// Extract the inner `Duration`.
+    pub fn into_std(self) -> Duration {
+        self.elapsed
     }
 
     /// Print the elapsed time with a description.
