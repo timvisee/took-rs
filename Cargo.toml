@@ -16,7 +16,3 @@ gitlab = { repository = "timvisee/took-rs", branch = "master" }
 
 [workspace]
 members = ["took-macro"]
-
-[dev-dependencies]
-# Member crate is used in examples
-took-macro = { version = "*", path = "./took-macro" }

@@ -14,6 +14,8 @@ use syn::{Lit, parse_quote, Meta, parse_macro_input, ItemFn, NestedMeta, Attribu
 /// # Examples
 ///
 /// ```rust
+/// #[macro_use] extern crate took_macro;
+///
 /// #[took(description = "A heavy task")]
 /// fn my_function() {
 ///     // Written to stderr on return:
