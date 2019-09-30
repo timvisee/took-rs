@@ -1,4 +1,4 @@
-# took: easily measure & report elapsed time
+# `took`: easily measure & report elapsed time
 I always find measuring run time of code and reporting it in a human readable
 format troublesome.
 
@@ -12,9 +12,9 @@ use took::Timer;
 
 // # Measure & report manually using Timer stopwatch
 
-let took = Timer::new();
+let timer = Timer::new();
 // Run heavy task
-println!("Done! Took {}", took.took());
+println!("Done! Took {}", timer.took());
 
 // Prints:
 // Done! Took 1.00 s
@@ -58,10 +58,40 @@ pub fn other_function() {
 ```
 
 ## Usage
+Add the dependencies in your `Cargo.toml`. The `took-macro` dependency is only
+required if you'll be using the `#[took]` attribute macro.
+
 ```Cargo.toml
 [dependencies]
 took = "0.1"
 took-macro = "0.1" # if using macros
+```
+
+Import and start using:
+
+```rust
+use took::{Timer, took};
+
+let timer = Timer::new();
+println!("Done! Took {}", timer.took());
+
+let (took, result) = took(|| {
+    // Run heavy task
+});
+println!("Done, took {}", took);
+```
+
+If you'll be using `#[took]` attribute macro, explicitly import it:
+
+```rust
+#[macro_use]
+extern crate took_macro;
+
+#[took]
+pub fn function_a() {}
+
+#[took(description = "Some function")]
+pub fn function_a() {}
 ```
 
 ## License
