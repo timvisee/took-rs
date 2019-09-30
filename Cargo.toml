@@ -1,0 +1,7 @@
+[package]
+name = "took"
+version = "0.1.0"
+authors = ["Tim Visée <tim@visee.me>"]
+edition = "2018"
+
+[dependencies]
