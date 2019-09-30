@@ -17,4 +17,4 @@ proc-macro = true
 [dependencies]
 quote = "1.0"
 syn = { version = "1.0", features = ["full", "extra-traits"] }
-took = { version = "*", path = "../" }
+took = { version = "0.1", path = "../" }
