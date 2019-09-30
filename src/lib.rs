@@ -5,13 +5,13 @@ use std::time::{Duration, Instant};
 ///
 /// On creation this struct immediately starts tracking elapsed time.
 #[derive(Clone, Debug)]
-pub struct Take {
+pub struct Timer {
     /// The instant this stopwatch was started at.
     start: Instant,
 }
 
-impl Take {
-    /// Construct a new `Take` stopwatch, start immediately.
+impl Timer {
+    /// Construct a new `Timer` stopwatch, start immediately.
     pub fn new() -> Self {
         Self::default()
     }
@@ -22,7 +22,7 @@ impl Take {
     }
 }
 
-impl Default for Take {
+impl Default for Timer {
     fn default() -> Self {
         Self {
             start: Instant::now(),
@@ -30,7 +30,7 @@ impl Default for Take {
     }
 }
 
-impl fmt::Display for Take {
+impl fmt::Display for Timer {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         self.took().fmt(f)
     }
@@ -51,7 +51,7 @@ impl Took {
     ///
     /// Prints the following formatted text to `stdout`:
     ///
-    /// ```
+    /// ```skip
     /// description took 0 s
     /// ```
     pub fn describe(&self, description: &str) {
@@ -90,7 +90,7 @@ pub fn took<T, F>(f: F) -> (Took, T)
 where
     F: FnOnce() -> T,
 {
-    let take = Take::new();
+    let take = Timer::new();
     let out = f();
     (take.took(), out)
 }
@@ -99,7 +99,7 @@ where
 ///
 /// Prints the following formatted text to `stdout`:
 ///
-/// ```
+/// ```skip
 /// description took 0 s
 /// ```
 ///

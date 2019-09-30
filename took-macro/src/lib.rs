@@ -40,7 +40,7 @@ pub fn took(attr: TokenStream, item: TokenStream) -> TokenStream {
     item.block.stmts.insert(
         0,
         parse_quote! {
-            let ___took = took::Take::new();
+            let ___took = took::Timer::new();
         },
     );
     item.block.stmts.push(

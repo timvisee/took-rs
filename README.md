@@ -6,13 +6,13 @@ This crate provides a few simple interfaces to do just that.
 
 ## Examples
 ```rust
-use took::Take;
+use took::Timer;
 
 
 
-// # Measure & report manually using Take stopwatch
+// # Measure & report manually using Timer stopwatch
 
-let took = Take::new();
+let took = Timer::new();
 // Run heavy task
 println!("Done! Took {}", took.took());
 
@@ -55,6 +55,13 @@ pub fn other_function() {
 // Prints:
 // my_function() took 1.00 s
 // Render finished, took 1.00 s
+```
+
+## Usage
+```Cargo.toml
+[dependencies]
+took = "0.1"
+took-macro = "0.1" # if using macros
 ```
 
 ## License
