@@ -72,6 +72,9 @@ This crate provides a few simple interfaces to do just that.
   // Render finished, took 1.00 s
   ```
 
+## Requirements
+- Rust 1.33 or newer (with `std`)
+
 ## Usage
 Add the dependencies in your `Cargo.toml`. The `took-macro` dependency is only
 required if you'll be using the `#[took]` attribute macro.
