@@ -61,7 +61,6 @@ This crate provides a few simple interfaces to do just that.
       // Run heavy task
   }
 
-
   #[took(description = "Render finished,")]
   pub fn other_function() {
       // Run heavy task
@@ -106,10 +105,10 @@ If you'll be using `#[took]` attribute macro, explicitly import it:
 extern crate took_macro;
 
 #[took]
-pub fn function_a() {}
+pub fn function_one() {}
 
-#[took(description = "Some function")]
-pub fn function_a() {}
+#[took(description = "Some heavy logic finished,")]
+pub fn function_two() {}
 ```
 
 ## TODO

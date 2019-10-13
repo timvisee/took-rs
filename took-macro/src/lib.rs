@@ -3,7 +3,7 @@ extern crate proc_macro;
 use proc_macro::TokenStream;
 
 use quote::quote;
-use syn::{Lit, parse_quote, Meta, parse_macro_input, ItemFn, NestedMeta, AttributeArgs};
+use syn::{parse_macro_input, parse_quote, AttributeArgs, ItemFn, Lit, Meta, NestedMeta};
 
 /// Measure run time of a function and report elapsed time.
 ///
@@ -35,8 +35,8 @@ pub fn took(attr: TokenStream, item: TokenStream) -> TokenStream {
     let mut item = parse_macro_input!(item as ItemFn);
 
     // Obtain the description
-    let description = find_param_str("description", &args)
-        .unwrap_or_else(|| format!("{}()", item.sig.ident));
+    let description =
+        find_param_str("description", &args).unwrap_or_else(|| format!("{}()", item.sig.ident));
 
     // Wrap function with stopwatch
     item.block.stmts.insert(
@@ -45,11 +45,9 @@ pub fn took(attr: TokenStream, item: TokenStream) -> TokenStream {
             let ___took = took::Timer::new();
         },
     );
-    item.block.stmts.push(
-        parse_quote! {
-            eprintln!("{} took {}", #description, ___took);
-        },
-    );
+    item.block.stmts.push(parse_quote! {
+        eprintln!("{} took {}", #description, ___took);
+    });
 
     // Convert modified item back into token stream
     quote!(#item).into()
@@ -62,8 +60,7 @@ pub fn took(attr: TokenStream, item: TokenStream) -> TokenStream {
 ///
 /// If the parameter was not found, or if the value wasn't a string, `None` is returned.
 fn find_param_str(name: &str, args: &[NestedMeta]) -> Option<String> {
-    args
-        .iter()
+    args.iter()
         .filter_map(|arg| match arg {
             NestedMeta::Meta(Meta::NameValue(nv)) => Some(nv),
             _ => None,
@@ -71,7 +68,7 @@ fn find_param_str(name: &str, args: &[NestedMeta]) -> Option<String> {
         .filter_map(|arg| {
             // Match the parameter identifier
             match arg.path.segments.first() {
-                Some(segment) if segment.ident == name => {},
+                Some(segment) if segment.ident == name => {}
                 _ => return None,
             }
 

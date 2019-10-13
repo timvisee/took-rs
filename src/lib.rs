@@ -54,6 +54,11 @@ impl Took {
         self.elapsed
     }
 
+    /// Get a reference to the inner `Duration`.
+    pub fn as_std(&self) -> &Duration {
+        &self.elapsed
+    }
+
     /// Print the elapsed time with a description.
     ///
     /// Prints the following formatted text to `stdout`:
