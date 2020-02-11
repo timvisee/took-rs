@@ -5,6 +5,7 @@ stages:
   - test
   - release
 
+# Variable defaults
 variables:
   RUST_VERSION: stable
 
@@ -25,10 +26,6 @@ before_script:
   - |
     rustc --version
     cargo --version
-
-# Variable defaults
-variables:
-  RUST_VERSION: stable
 
 # Check on stable, beta and nightly 
 .check-base: &check-base
