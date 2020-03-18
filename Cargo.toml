@@ -16,3 +16,6 @@ gitlab = { repository = "timvisee/took-rs", branch = "master" }
 
 [workspace]
 members = ["took-macro"]
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
